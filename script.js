@@ -65,6 +65,18 @@ function updateDisplay(objectSelected) {
     document.getElementById("posy").value = objectSelected.getTranslate()[1];
 }
 
+function objectName(){
+    if (objectSelected != null) {
+        try {
+            name = document.getElementById("objectName").value;
+            objectSelected.setName(name);
+            drawCanvas();
+        } catch (error) {
+            window.alert(error);
+        }
+    }
+}
+
 function updatePosition() {
     if (objectSelected != null) {
         try {
@@ -73,7 +85,47 @@ function updatePosition() {
             objectSelected.setTranslate(posx, posy);
             drawCanvas();
         } catch (error) {
-            alert(error);
+            window.alert(error);
         }
     }
 }
+
+function scaleObject() {
+    if (objectSelected != null) {
+        try {
+            scalex = parseFloat(document.getElementById("scalex").value);
+            scaley = parseFloat(document.getElementById("scaley").value);
+            objectSelected.setScale(scalex, scaley);
+            drawCanvas();
+        } catch (error) {
+            window.alert(error);
+        }
+    }
+}
+
+
+function colorObject(){
+    if(objectSelected != null){
+        try {
+            fill = "#" + document.getElementById("colorObject").value;
+            objectSelected.setFill(fill);
+            drawCanvas();
+        } catch (error) {
+            window.alert(error);
+        }
+    }
+}
+
+function strokeObject(){
+    if(objectSelected != null){
+        try {
+            stroke = "#" + document.getElementById("strokeObject").value;
+            objectSelected.setStroke(stroke);
+            drawCanvas();
+        } catch (error) {
+            window.alert(error);
+        }
+    }
+}
+
+
