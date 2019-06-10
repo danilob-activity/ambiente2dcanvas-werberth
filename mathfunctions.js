@@ -65,6 +65,14 @@ function transformCanvas(Width, Height) {
     ];
 }
 
+function transformUsual(Width, Height) {
+    return [
+        [1,  0,  -Width / 2.],
+        [0, -1,  Height / 2.],
+        [0,  0,            1]
+    ];
+}
+
 
 function mult(a, b) {
     var aNumRows = a.length,
