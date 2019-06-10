@@ -32,9 +32,54 @@ Box.prototype.setRotate = function(theta) {
     this.R = rotate(theta);
 }
 
-
 Box.prototype.setScale = function(x, y) {
     this.S = scale(x, y);
+}
+
+Box.prototype.setFill = function(fill) {
+    this.fill = fill;
+}
+
+Box.prototype.setStroke = function(stroke) {
+    this.stroke = stroke;
+}
+
+Box.prototype.getInverseTranslate = function(){
+    return inverseTranslate(this.T);
+}
+
+Box.prototype.getInverseRotate = function(){
+    return inverseRotate(this.R);
+}
+
+Box.prototype.getInverseScale = function(){
+    return inverseScale(this.S);
+}
+
+Box.prototype.tryIntersection = function(coord){
+    
+    var iR = this.getInverseRotate();
+    var iT = this.getInverseTranslate();
+    var iS = this.getInverseScale();
+
+    var Mg = mult(mult(iS, iR), iT);
+
+    var pL = multVec(Mg, coord);
+
+    var points = [];
+    points.push([this.center[0] + this.width / 2, this.center[1] + this.height / 2, 1]);
+    points.push([this.center[0] - this.width / 2, this.center[1] + this.height / 2, 1]);
+    points.push([this.center[0] - this.width / 2, this.center[1] - this.height / 2, 1]);
+    points.push([this.center[0] + this.width / 2, this.center[1] - this.height / 2, 1]);
+
+    if(pL[0] >= points[1][0] && pL[0] <= points[0][0]){
+        if(pL[1] >= points[2][1] && pL[1] <= points[1][1]){
+            //console.log("Houve interseção!");
+            return true;
+        }
+    }
+    //console.log("Não houve interseção!");
+    return false;
 }
 
 Box.prototype.draw = function(canv = ctx) { //requer o contexto de desenho
