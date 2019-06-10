@@ -25,6 +25,30 @@ function rotate(theta) {
     ]; //retorna matriz 3x3
 }
 
+function inverseTranslate(mat){
+    return[
+        [1, 0, -mat[0][2]],
+        [0, 1, -mat[1][2]],
+        [0, 0,          1]
+    ];
+}
+
+function inverseScale(mat){
+    return[
+        [1. / mat[0][0], 0, 0],
+        [0, 1. / mat[1][1], 0],
+        [0,              0, 1]
+    ];
+}
+
+function inverseRotate(mat){
+    return[
+        [mat[0][0], mat[1][0], 0],
+        [mat[0][1], mat[1][1], 0],
+        [0, 0, 1]
+    ];
+}
+
 function identity(v = 1) { // identidade
     return [
         [1 * v, 0, 0],
